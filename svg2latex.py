@@ -403,7 +403,7 @@ def main():
 		sys.stderr.write("This script requires an argument")
 		return 1
 	basename, seperator, ext = sys.argv[1].rpartition('.')
-	xmlData, texDoc = process_svg('test-figure.svg')
+	xmlData, texDoc = process_svg(sys.argv[1])
 	texpath = basename + '.pdf_tex'
 	pdfpath = basename + '.pdf'
 
