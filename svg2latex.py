@@ -140,7 +140,7 @@ class TeXLabel:
 		r,g,b = s.color
 		if (r != 0) or (g != 0) or (b != 0):
 			color = '\\color[RGB]{{{},{},{}}}'.format(r,g,b)
-
+			print ("Color: {}".format(color))
 		font = '\\' + s.fontfamily + 'family'
 		if s.fontweight >= WEIGHT_BOLD:
 			font = font + r'\bfseries'
@@ -158,7 +158,11 @@ class TeXLabel:
 		elif s.align == ALIGN_RIGHT:
 			align = r'\makebox(0,0)[br]'
 
-		texcode = font + color + align + r'{\smash{' + s.text + '}}'
+		text = ""
+		if s.text != None:
+			text = s.text
+			
+		texcode = font + color + align + r'{\smash{' + text + '}}'
 
 		if s.angle != 0.0:
 			texcode = '\\rotatebox{{{}}}{{{}}}'.format(s.angle, texcode)
