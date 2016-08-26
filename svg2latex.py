@@ -140,7 +140,6 @@ class TeXLabel:
 		r,g,b = s.color
 		if (r != 0) or (g != 0) or (b != 0):
 			color = '\\color[RGB]{{{},{},{}}}'.format(r,g,b)
-			print ("Color: {}".format(color))
 		font = '\\' + s.fontfamily + 'family'
 		if s.fontweight >= WEIGHT_BOLD:
 			font = font + r'\bfseries'
@@ -399,9 +398,13 @@ def svgDataToPdfInkscape(xmldata, outpath):
 	fl.close()
 
 def main():
+	# test if we have an argument
+	if len(sys.argv) < 2:
+		sys.stderr.write("This script requires an argument")
+		return 1
+	basename, seperator, ext = sys.argv[1].rpartition('.')
 	xmlData, texDoc = process_svg('test-figure.svg')
-	basename, ext = 'test-figure', '.svg'
-	texpath = basename + '.tex'
+	texpath = basename + '.pdf_tex'
 	pdfpath = basename + '.pdf'
 
 	texDoc.backgroundGraphic = pdfpath
